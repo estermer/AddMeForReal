@@ -1,3 +1,4 @@
+
 ![Add Me](/WebPage/img/Asset 1.png)
 
 ***
@@ -19,3 +20,4 @@ One stop shop to add a friend on multiple social media sites
 #### Scan others QR codes to friend them on all their social media sites at once
 
 ![Friends](/WebPage/img/images.jpg)
+

@@ -7,8 +7,6 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Add Me</title>
-    <script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
-    <script src="render.js" charset="utf-8"></script>
 </head>
 
 
@@ -18,7 +16,6 @@
 
     <!-- Theme CSS -->
     <link href="WebPage/css/freelancer.min.css" rel="stylesheet">
-    <link href="WebPage/css/freelancer.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="WebPage/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -73,13 +70,10 @@
     <header>
         <div class="container">
             <div class="row">
-                <div id="social" class="col-lg-12">
+                <div class="col-lg-12">
                     <img class="img-responsive" width="300" height="300" src="WebPage/img/Asset 2.png" alt="">
                     <div class="intro-text">
-                        <form id="phone-form" method="post" action="/" onsubmit="return false;">
-                          <input id="phone-number" type="text" name="user[name]" value="" placeholder="Enter Your Phone Number: XXXXXXXXXX">
-                          <input id="submit-phone" type="submit" value="SUBMIT">
-                        </form>
+                        <span class="name">Download AddMe</span>
                         <hr class="star-light">
                         <span class="skills">Enhance your network with AddMe, a simple app that automagically adds your contacts to facebook, email, twitter, snapchat, and more!</span>
                     </div>
@@ -92,7 +86,7 @@
     <section id="portfolio">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 col-sm-4 text-center">
+                <div class="col-lg-12 text-center">
                     <h2>How We Connect</h2>
                     <br>
                     <p> Scanning our QR code allows you to add a contact to facebook, snapchat, githib, and instagram, all at once!
@@ -116,7 +110,7 @@
                     </a>
                 </div>
                 <div class="col-sm-4 portfolio-item">
-                    <a href="https://www.facebook.com/dialog/oauth?client_id=134558940334255&redirect_uri=http://localhost:1992/oauth/fb" class="portfolio-link" data-toggle="modal">
+                    <a href="https://www.facebook.com/dialog/oauth?client_id=134558940334255&redirect_uri=https://getappme.herokuapp.com/oauth/fb" class="portfolio-link" data-toggle="modal">
                         <div class="caption">
                             <div class="caption-content">
                                 <i class="fa fa-search-plus fa-3x"></i>
@@ -126,7 +120,7 @@
                     </a>
                 </div>
                 <div class="col-sm-4 portfolio-item">
-                    <a href="https://github.com/login/oauth/authorize/?client_id=89221658f77bf282f490&redirect_uri=http://localhost:1992/oauth/gh&scope=user" class="portfolio-link" data-toggle="modal">
+                    <a href="https://github.com/login/oauth/authorize/?client_id=89221658f77bf282f490&redirect_uri=https://getappme.herokuapp.com/oauth/gh&scope=user" class="portfolio-link" data-toggle="modal">
                         <div class="caption">
                             <div class="caption-content">
                                 <i class="fa fa-search-plus fa-3x"></i>
@@ -135,8 +129,7 @@
                         <img width="500" height="500" src="WebPage/img/portfolio/github.png" class="img-responsive" alt="">
                     </a>
                 </div>
-              <div class="row">
-                 <div class="col-lg-6 col-sm-6 portfolio-item">
+                 <div class="col-sm-4 portfolio-item">
                     <a href="#page-top" class="portfolio-link" data-toggle="modal">
                         <div class="caption">
                             <div class="caption-content">
@@ -146,8 +139,8 @@
                         <img width="400" height="400" src="WebPage/img/portfolio/snapchat2.png" class="img-responsive" alt="">
                     </a>
                 </div>
-                 <div class="col-lg-6 col-sm-6 portfolio-item">
-                    <a href="https://api.instagram.com/oauth/authorize/?client_id=fc50049ba7df49b7b96535f892642366&redirect_uri=http://localhost:1992/oauth/ig&response_type=code&scope=relationships" class="portfolio-link" data-toggle="modal">
+                 <div class="col-sm-4 portfolio-item">
+                    <a href="https://api.instagram.com/oauth/authorize/?client_id=fc50049ba7df49b7b96535f892642366&redirect_uri=https://getappme.herokuapp.com/oauth/ig&response_type=code&scope=relationships" class="portfolio-link" data-toggle="modal">
                         <div class="caption">
                             <div class="caption-content">
                                 <i class="fa fa-search-plus fa-3x"></i>
@@ -156,7 +149,6 @@
                         <img width="500" height="500" src="WebPage/img/portfolio/instagram.png" class="img-responsive" alt="">
                     </a>
                 </div>
-              </div>
             </div>
         </div>
     </section>
@@ -518,3 +510,27 @@
 </body>
 
 </html>
+
+
+
+
+
+<!--
+<body>
+    Sup Dawg
+    <a href="https://api.instagram.com/oauth/authorize/?client_id=fc50049ba7df49b7b96535f892642366&redirect_uri=http://localhost:1992/oauth/ig&response_type=code&scope=relationships">
+      <button>InstaGRAM</button>
+    </a>
+    <a href="https://www.facebook.com/dialog/oauth?client_id=134558940334255&redirect_uri=http://localhost:1992/oauth/fb">
+      <button>Facebook Login</button>
+    </a>
+    <a href="https://github.com/login/oauth/authorize/?client_id=89221658f77bf282f490&redirect_uri=http://localhost:1992/oauth/gh&scope=user">
+      <button>GitHub</button>
+    </a>
+    <form>
+      <input type="text" name="snapchat" placeholder="Snapchat Name"></input>
+      <input type="submit" value="Submit" />
+    </form>
+
+</body>
+</html>-->

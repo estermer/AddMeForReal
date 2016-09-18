@@ -25,6 +25,42 @@ app.post("/", function (req, res) {
 
 /*****************************************/
 
+/******************GET USERID*************/
+
+function handleIncomingRequest(request, response) {
+var jsonData;
+  request.on('readable', function(){
+    var data = request.data();
+    if(typeof data === 'string'){
+      jsonData += data;
+    } else if (typeof data === 'object' && data instanceof Buffer){
+      jsonData += data.toString("utf8");
+    }
+  });
+
+  request.on('end', function(){
+    var out = '';
+    if(!jsonData) {
+      out = "I got nothing";
+    } else {
+      var json;
+      try {
+        json = JSON.parse(jsonData);
+      } catch (e) {
+      }
+      if(!json){
+        out = "Invalid JSON";
+      } else {
+        out = "Valid JSON data: " + jsonData;
+      }
+    }
+
+    response.end(out);
+  });
+};
+
+app.post('http://localhost:1992', handleIncomingRequest);
+
 
 app.get('/oauth/ig', function (req, res) {
   var form = new FormData();
@@ -47,7 +83,9 @@ app.get('/oauth/ig', function (req, res) {
           "tableName": "AddMeUsers",
           "payload": {
             "Key": {
+
                 "userid": "6093044061"
+
             },
             "UpdateExpression": "set igid = :id, ig_access = :ac",
             "ExpressionAttributeValues": {
@@ -103,6 +141,7 @@ app.post('/ig/follow', function(req, res) {
 
 
 app.get('/oauth/fb', function (req, res) {
+
     https.get('https://graph.facebook.com/v2.3/oauth/access_token?client_id=134558940334255&redirect_uri=http://getaddme.herokuapp.com/oauth/fb&client_secret=e485181d992009910034bbda611eda66&code=' + req.query.code, (response) => {
 
 	    console.log(req.query.code);
@@ -120,6 +159,7 @@ app.get('/oauth/fb', function (req, res) {
 })
 
 app.get('/oauth/gh', function (req, res) {
+
 
     https.get('https://github.com/login/oauth/access_token?client_id=89221658f77bf282f490&client_secret=11f6d9c96c884834e4d3c4cfc0b8cd5c32231c52&code=' + req.query.code + '&redirect_uri=http://getaddme.herokuapp.com/oauth/gh', (response) => {
 
@@ -150,7 +190,9 @@ app.get('/oauth/gh', function (req, res) {
                   "tableName": "AddMeUsers",
                   "payload": {
                     "Key": {
+
                         "userid": "6093044061"
+
                     },
                     "UpdateExpression": "set ghid = :id, gh_access = :ac",
                     "ExpressionAttributeValues": {
@@ -258,7 +300,9 @@ app.post('/gh/follow', function(req, res) {
     console.log(req.query.friend_id);
 });
 
+
 app.post('/:friend_id/addme', function(req, res) {
+
   console.log("Follow all called.");
   // Get user calling function
   var myId = req.query.my_id;
@@ -375,6 +419,10 @@ app.get('/JtoE', function(req, res) {
 
 app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/authorize.html'));
+});
+
+app.get('/qr', function(req, res) {
+    res.sendFile(path.join(__dirname + '/qr.html'));
 });
 
 var server = app.listen(process.env.PORT || 1992, function () {
