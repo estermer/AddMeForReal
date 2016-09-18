@@ -72,7 +72,7 @@ app.get('/oauth/ig', function (req, res) {
           "tableName": "AddMeUsers",
           "payload": {
             "Key": {
-                "userid": "8456255813"
+                "userid": "6074220119"
             },
             "UpdateExpression": "set igid = :id, ig_access = :ac",
             "ExpressionAttributeValues": {
@@ -175,7 +175,7 @@ app.get('/oauth/gh', function (req, res) {
                   "tableName": "AddMeUsers",
                   "payload": {
                     "Key": {
-                        "userid": "8456255813"
+                        "userid": "6074220119"
                     },
                     "UpdateExpression": "set ghid = :id, gh_access = :ac",
                     "ExpressionAttributeValues": {
@@ -229,7 +229,7 @@ app.post('/snapchat/save/:snapchat_id/', function(req, res) {
     "tableName": "AddMeUsers",
     "payload": {
       "Key": {
-          "userid": "8456255813"
+          "userid": "6074220119"
       },
       "UpdateExpression": "set scid = :id",
       "ExpressionAttributeValues": {
