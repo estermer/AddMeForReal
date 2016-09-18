@@ -385,6 +385,10 @@ app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/authorize.html'));
 });
 
+app.get('/qr', function(req, res) {
+    res.sendFile(path.join(__dirname + '/qr.html'));
+});
+
 var server = app.listen(process.env.PORT || 1992, function () {
 
   var host = server.address().address
