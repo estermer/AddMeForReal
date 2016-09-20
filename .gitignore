@@ -36,9 +36,8 @@ db/*.sqlite3
 rerun.txt
 pickle-email-*.html
 .zeus.sock
-.gitignore
 node_modules
-hello.txt
+
 
 **.orig
 
