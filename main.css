@@ -1,0 +1,37 @@
+html {
+    height: 100%;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  color: white;
+  height: 100%;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background: #4dc3cf;
+  background: -webkit-linear-gradient(rgba(77,195,207,0), #4dc3cf); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(rgba(77,195,207,0), #4dc3cf); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(rgba(77,195,207,0), #4dc3cf); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(rgba(77,195,207,0), #4dc3cf);
+
+}
+
+.wrapper {
+  height: 50vh;
+  width: 40vw;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+
+#signup {
+  font-weight: bold;
+  font-size: 20px;
+  color: gray;
+  background-color: white;
+  border-radius: 20px;
+  border-color: #3498db;
+  width: 150px;
+  margin: 50px;
+}
