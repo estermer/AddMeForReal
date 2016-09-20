@@ -1,8 +1,6 @@
 
 # Add Me
 
----
-
 We wanted to build a platform for everyone to connect on multiple mediums (Facebook, Instagram, Snapchat, Twitter, YouTube, Github, LinkedIn, etc) in an immediate and intuitive way, instead of the slow normal way of adding a person to each social media one by one. (Note: We are not a new social media platform)
 
 Over the course of the hackathon we were able to build a website that connects your Facebook, Instagram, Github, Snapchat, and Phone number to anyone else in a second by scanning a QR code.
