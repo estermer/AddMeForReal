@@ -14,6 +14,7 @@ body {
   background: -o-linear-gradient(rgba(77,195,207,0), #4dc3cf); /* For Opera 11.1 to 12.0 */
   background: -moz-linear-gradient(rgba(77,195,207,0), #4dc3cf); /* For Firefox 3.6 to 15 */
   background: linear-gradient(rgba(77,195,207,0), #4dc3cf);
+  /*older orange color - #f39c12*/
 
 }
 
