@@ -9,6 +9,8 @@ var https = require('https');
 var request = require("request");
 var path = require('path');
 var bodyParser = require('body-parser');
+var methodOverride = require('method-override');
+app.use(methodOverride('_method'));
 // var FB = require('fb');
 /******************************************************/
 
