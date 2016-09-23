@@ -19,7 +19,6 @@ app.use(express.static(__dirname + '/public'));
 var hbs = require('hbs');
 app.set('view engine', 'hbs');
 app.set('views', './views')
-require('handlebars-form-helpers').register(hbs.handlebars);
 /******************************************************/
 
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
@@ -411,11 +410,10 @@ app.get('/JtoE', function(req, res) {
 
 /*****************SERVER************************************/
 
-var server = app.listen(process.env.PORT || 1992, function () {
+var port = process.env.PORT || 1992
 
-  var host = server.address().address
-  var port = server.address().port
+app.listen(port, function () {
 
-  console.log("Example app listening at http://%s:%s", host, port);
+  console.log("Server listening at port " + port);
 
 })
