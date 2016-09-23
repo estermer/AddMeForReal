@@ -1,6 +1,7 @@
 /// GET ADDME APP INITIALLY DESIGNED AT BIGRED HACKS ///
 /******************************************************/
 
+
 /************PACKAGES**********************************/
 var FormData = require('form-data');
 var util = require('util');
@@ -11,20 +12,21 @@ var bodyParser = require('body-parser');
 // var FB = require('fb');
 /******************************************************/
 
+
 /**************EXPRESS*********************************/
 var express = require('express');
 var app = express();
 app.use(express.static(__dirname + '/public'));
+app.use( bodyParser.json() );    // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({  // to support URL-encoded bodies
+  extended: true
+}));
 /*********************HANDLEBARS******************/
 var hbs = require('hbs');
 app.set('view engine', 'hbs');
 app.set('views', './views')
 /******************************************************/
 
-app.use( bodyParser.json() );       // to support JSON-encoded bodies
-app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
-  extended: true
-}));
 
 /**************FRONTEND RENDERING**********************/
 
@@ -41,6 +43,7 @@ app.get('/social-authorization', function(request, response){
 /******************************************************/
 
 
+/********************INSTAGRAM*************************/
 app.get('/oauth/ig', function (req, res) {
   var form = new FormData();
   form.append('client_id',process.env.IG_CLIENT)
@@ -118,7 +121,27 @@ app.post('/ig/follow', function(req, res) {
     });
 });
 
+app.post('/ig/follow', function(req, res) {
+    console.log(req.query.friend_id);
+    var theAccess = req.query.access_token;
+    var form = new FormData();
+    form.append('access_token', theAccess);
+    form.append('action', 'follow');
+    form.submit({hostname: "api.instagram.com", path: `/v1/users/${req.query.friend_id}/relationship?access_token=${theAccess}`, protocol: 'https:'}, (error, response) => {
+      var body = "";
+      response.on('readable', function() {
+          body += response.read();
+      });
+      response.on('end', function() {
+          console.log(body);
+          res.send(body);
+      });
+    });
+});
+/******************************************************/
 
+
+/**********************FACEBOOK************************/
 app.get('/oauth/fb', function (req, res) {
 
     https.get('https://graph.facebook.com/v2.3/oauth/access_token?client_id=134558940334255&redirect_uri=http://getaddme.herokuapp.com/oauth/fb&client_secret=e485181d992009910034bbda611eda66&code=' + req.query.code, (response) => {
@@ -136,7 +159,10 @@ app.get('/oauth/fb', function (req, res) {
 
   	});
 })
+/******************************************************/
 
+
+/**********************GITHUB**************************/
 app.get('/oauth/gh', function (req, res) {
 
 
@@ -215,6 +241,13 @@ app.get('/oauth/gh', function (req, res) {
   	});
 })
 
+// app.post('/gh/follow', function(req, res) {
+//     console.log(req.query.friend_id);
+// });
+/******************************************************/
+
+
+/*******************SNAPCHAT**************************/
 app.post('/snapchat/save/:snapchat_id/', function(req, res) {
   console.log("Save Snapchat Id");
   // Get user calling function
@@ -256,28 +289,7 @@ app.post('/snapchat/save/:snapchat_id/', function(req, res) {
       res.send(body);
     });
 });
-
-app.post('/ig/follow', function(req, res) {
-    console.log(req.query.friend_id);
-    var theAccess = req.query.access_token;
-    var form = new FormData();
-    form.append('access_token', theAccess);
-    form.append('action', 'follow');
-    form.submit({hostname: "api.instagram.com", path: `/v1/users/${req.query.friend_id}/relationship?access_token=${theAccess}`, protocol: 'https:'}, (error, response) => {
-      var body = "";
-      response.on('readable', function() {
-          body += response.read();
-      });
-      response.on('end', function() {
-          console.log(body);
-          res.send(body);
-      });
-    });
-});
-
-app.post('/gh/follow', function(req, res) {
-    console.log(req.query.friend_id);
-});
+/******************************************************/
 
 
 app.post('/:friend_id/addme', function(req, res) {
@@ -381,6 +393,7 @@ app.post('/:friend_id/addme', function(req, res) {
     });
 });
 
+/******************SAMPLE QR********************/
 app.get('/JtoE', function(req, res) {
   var options = { method: 'POST',
   url: 'https://getaddme.herokuapp.com/6074220119/addme',
@@ -395,7 +408,7 @@ app.get('/JtoE', function(req, res) {
     console.log(body);
   });
 });
-
+/******************SAMPLE QR********************/
 
 
 // app.get('/', function(req, res) {
