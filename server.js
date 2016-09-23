@@ -1,6 +1,7 @@
-var express = require('express');
-var app = express();
-var https = require('https');
+/// GET ADDME APP INITIALLY DESIGNED AT BIGRED HACKS ///
+/******************************************************/
+
+/************PACKAGES**********************************/
 var FormData = require('form-data');
 var util = require('util');
 var https = require('https');
@@ -8,14 +9,28 @@ var request = require("request");
 var path = require('path');
 var bodyParser = require('body-parser');
 var FB = require('fb');
+/******************************************************/
+
+/**************EXPRESS*********************************/
+var express = require('express');
+var app = express();
+app.use(express.static(__dirname + '/public'));
+/*********************HANDLEBARS******************/
+var hbs = require('hbs');
+app.set('view engine', 'hbs');
+app.set('views', './views')
+require('handlebars-form-helpers').register(hbs.handlebars);
+/******************************************************/
 
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 }));
 
+//  this needs to be sent to a data source
 var userid;
 var phoneSubmitted = false;
+/////////
 
 /******************GET USERID*************/
 
