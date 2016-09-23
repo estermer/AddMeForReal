@@ -8,7 +8,7 @@ var https = require('https');
 var request = require("request");
 var path = require('path');
 var bodyParser = require('body-parser');
-var FB = require('fb');
+// var FB = require('fb');
 /******************************************************/
 
 /**************EXPRESS*********************************/
@@ -27,54 +27,19 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 }));
 
-//  this needs to be sent to a data source
-var userid;
-var phoneSubmitted = false;
-/////////
+/**************FRONTEND RENDERING**********************/
 
-/******************GET USERID*************/
-
-app.post("/", function (req, res) {
-    userid = req.body.user.name;
+//HOME
+app.get('/', function(request, response){
+  response.render('home');
 });
 
-/*****************************************/
+//INDEX
+app.get('/social-authorization', function(request, response){
+  response.render('index');
+});
 
-/******************GET USERID*************/
-
-function handleIncomingRequest(request, response) {
-var jsonData;
-  request.on('readable', function(){
-    var data = request.data();
-    if(typeof data === 'string'){
-      jsonData += data;
-    } else if (typeof data === 'object' && data instanceof Buffer){
-      jsonData += data.toString("utf8");
-    }
-  });
-
-  request.on('end', function(){
-    var out = '';
-    if(!jsonData) {
-      out = "I got nothing";
-    } else {
-      var json;
-      try {
-        json = JSON.parse(jsonData);
-      } catch (e) {
-      }
-      if(!json){
-        out = "Invalid JSON";
-      } else {
-        out = "Valid JSON data: " + jsonData;
-      }
-    }
-
-    response.end(out);
-  });
-};
-
-app.post('http://localhost:1992', handleIncomingRequest);
+/******************************************************/
 
 
 app.get('/oauth/ig', function (req, res) {
@@ -432,13 +397,19 @@ app.get('/JtoE', function(req, res) {
   });
 });
 
-app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname + '/authorize.html'));
-});
 
-app.get('/qr', function(req, res) {
-    res.sendFile(path.join(__dirname + '/qr.html'));
-});
+
+// app.get('/', function(req, res) {
+//     res.sendFile(path.join(__dirname + '/authorize.html'));
+// });
+//
+// app.get('/qr', function(req, res) {
+//     res.sendFile(path.join(__dirname + '/qr.html'));
+// });
+
+
+
+/*****************SERVER************************************/
 
 var server = app.listen(process.env.PORT || 1992, function () {
 
