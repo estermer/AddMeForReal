@@ -63,8 +63,8 @@ app.get('/', function(req, res){
   res.render('home');
 });
 
-//INDEX
-app.get('/social-authorization', function(req, res){
+INDEX
+app.get('/:username', function(req, res){
   res.render('index');
 });
 
@@ -97,6 +97,13 @@ app.post('/signup', function(req, res){
 //LOGIN
 app.post('/login', passport.authenticate('local'), function(req, res){
   res.redirect('/' + req.user.username);
+});
+
+//LOGOUT
+app.delete('/logout', function(req, res){
+  req.logout();
+  //redirects to the home to login or register
+  res.redirect('/');
 });
 
 /******************************************************/
