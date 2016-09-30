@@ -10,14 +10,23 @@ var request = require("request");
 var path = require('path');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
-app.use(methodOverride('_method'));
-// var FB = require('fb');
+var mongoose = require('mongoose');
+var passport = require('passport');
 /******************************************************/
 
+/*************Mongoose*********************************/
+mongoose.connect('mongodb://localhost/addme');
+mongoose.Promise = global.Promise;
+/******************************************************/
+
+/*************Strategies*********************************/
+var LocalStrategy = require('passport-local').Strategy;
+/******************************************************/
 
 /**************EXPRESS*********************************/
 var express = require('express');
 var app = express();
+app.use(methodOverride('_method'));
 app.use(express.static(__dirname + '/public'));
 app.use( bodyParser.json() );    // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({  // to support URL-encoded bodies

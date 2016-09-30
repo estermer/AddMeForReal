@@ -30,7 +30,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1f1f1f', end
   margin-top: 50px;
 }
 
-#signup {
+#signup, #login {
   font-weight: bold;
   font-size: 20px;
   color: gray;
@@ -39,4 +39,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1f1f1f', end
   border-color: #3498db;
   width: 150px;
   margin: 50px;
+}
+
+form {
+  font-size: 20px;
+}
+
+input {
+  margin: 10px;
+}
+
+.social-buttons {
+  margin-top: 20px;
 }
