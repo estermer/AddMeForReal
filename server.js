@@ -42,6 +42,19 @@ app.set('view engine', 'hbs');
 app.set('views', './views')
 /******************************************************/
 
+/**************PASSPORT CONFIGURATION******************/
+app.use(require('express-session')({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+/******************************************************/
 
 /**************FRONTEND RENDERING**********************/
 
@@ -57,13 +70,13 @@ app.get('/social-authorization', function(req, res){
 
 //USER-HOME
 app.get('/:username', function(req, res){
+  //making sure user cannot access his account unless authorized
   if (!req.user || req.user.username != req.params.username) {
     res.json({status: 401, message: 'unauthorized'})
   } else {
     User.findOne({username: req.params.username}, function(err, user){
       if(err) console.log(err);
       console.log(user);
-
       res.render('user-home', { user: user.username});
     })
   }
@@ -71,7 +84,7 @@ app.get('/:username', function(req, res){
 
 //SIGNUP
 app.post('/signup', function(req, res){
-  User.create({
+  User.register(new User({
     username: req.body.username
   }),
   req.body.password,
@@ -79,8 +92,6 @@ app.post('/signup', function(req, res){
     if(err) res.redirect('/');
     res.redirect('/social-authorization');
   });
-
-
 });
 
 //LOGIN

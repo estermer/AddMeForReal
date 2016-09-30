@@ -2,7 +2,7 @@ $(function(){
 
   var $form = $('<form>').attr('method', 'POST');
   var username = 'username: <input type="text" name="username" value=""><br>';
-  var password = 'password: <input type="text" name="password" value=""><br>';
+  var password = 'password: <input type="password" name="password" value=""><br>';
   var submit = '<input type="submit" name="submit" value="Submit">';
   $form.html(username + password + submit);
 
