@@ -14,6 +14,10 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 /******************************************************/
 
+/*********************External Files*******************/
+var User = require('./models/user.js');
+/******************************************************/
+
 /*************Mongoose*********************************/
 mongoose.connect('mongodb://localhost/addme');
 mongoose.Promise = global.Promise;
@@ -42,13 +46,46 @@ app.set('views', './views')
 /**************FRONTEND RENDERING**********************/
 
 //HOME
-app.get('/', function(request, response){
-  response.render('home');
+app.get('/', function(req, res){
+  res.render('home');
 });
 
 //INDEX
-app.get('/social-authorization', function(request, response){
-  response.render('index');
+app.get('/social-authorization', function(req, res){
+  res.render('index');
+});
+
+//USER-HOME
+app.get('/:username', function(req, res){
+  if (!req.user || req.user.username != req.params.username) {
+    res.json({status: 401, message: 'unauthorized'})
+  } else {
+    User.findOne({username: req.params.username}, function(err, user){
+      if(err) console.log(err);
+      console.log(user);
+
+      res.render('user-home', { user: user.username});
+    })
+  }
+});
+
+//SIGNUP
+app.post('/signup', function(req, res){
+  User.create({
+    username: req.body.username
+  }),
+  req.body.password,
+  function(err, user){
+    if(err) res.redirect('/');
+    res.redirect('/social-authorization');
+  });
+
+
+});
+
+//LOGIN
+app.post('/login', passport.authenticate('local'), function(req, res){
+  res.redirect('/' + req.user.username);
 });
 
 /******************************************************/
