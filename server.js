@@ -63,7 +63,7 @@ app.get('/', function(req, res){
   res.render('home');
 });
 
-INDEX
+//INDEX
 app.get('/:username', function(req, res){
   res.render('index');
 });
