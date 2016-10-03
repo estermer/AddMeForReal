@@ -1,4 +1,6 @@
 /// GET ADDME APP INITIALLY DESIGNED AT BIGRED HACKS ///
+
+///CONTRIBUTERS: Jonathan Grant, Eric Stermer.
 /******************************************************/
 
 
