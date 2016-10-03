@@ -52,3 +52,30 @@ input {
 .social-buttons {
   margin-top: 20px;
 }
+
+/*Oauth index page*/
+
+.oauth-buttons {
+  border-radius: 10px;
+  color: white;
+  height: 50px;
+  width: 50px;
+  font-size: 30px;
+  margin: 20px;
+}
+
+#github-auth {
+  background-color: #333333;
+}
+
+#instagram-auth {
+  background-color: #517fa4;
+}
+
+#medium-auth {
+  background-color: #02b875;
+}
+
+#youtube-auth {
+  background-color: #e62117;
+}
