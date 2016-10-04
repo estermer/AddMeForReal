@@ -9,7 +9,7 @@ var SocialSchema = new Schema({
 });
 
 SocialSchema.plugin(passportLocalMongoose);
-var SocialModel = mongoose.model('User', SocialSchema);
+var SocialModel = mongoose.model('Socialmedia', SocialSchema);
 
 module.exports = {
   model: SocialModel,

@@ -77,7 +77,9 @@ app.get('/', function(req, res){
 
 //INDEX
 app.get('/:username', function(req, res){
-  res.render('index');
+  res.render('index', {
+    user: req.params.username
+  });
 });
 
 //USER-HOME

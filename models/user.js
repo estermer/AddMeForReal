@@ -1,14 +1,14 @@
 var mongoose = require('mongoose');
 var passportLocalMongoose = require('passport-local-mongoose');
 var Schema = mongoose.Schema;
-var Social = require('../controllers/socialmedia.js');
+var Social = require('../models/socialmedia.js');
 
 var UserSchema = new Schema({
   username: String,
   password: String,
   createdAt: Date,
   updatedAt: Date,
-  socialModels: [Social.schema];
+  socialModels: [Social.schema]
 
   /*
   userID: String //for the QR code or personal link
