@@ -14,3 +14,6 @@ After setting up my Trello Board, I was able to tackle a number of
 initial setups, schemas, routers, controllers, views, and styles.
 Completed the login authorization for the user, and got all the
 social buttons that I am going to use set up for post routes.
+
+![progress1](pregress1.png)
+![progress2](pregress2.png)
