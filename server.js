@@ -59,14 +59,16 @@ passport.deserializeUser(User.deserializeUser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 var instagramController = require('./controllers/instagram.js');
-var instagramController = require('./controllers/github.js');
-var instagramController = require('./controllers/youtube.js');
-var instagramController = require('./controllers/pinterest.js');
-app.use('/:username/instagram', instagramController);
-app.use('/:username/github', instagramController);
-app.use('/:username/youtube', instagramController);
-app.use('/:username/pinterest', instagramController);
+var githubController = require('./controllers/github.js');
+var youtubeController = require('./controllers/youtube.js');
+var pinterestController = require('./controllers/pinterest.js');
+app.use('/instagram', instagramController);
+app.use('/github', githubController);
+app.use('/youtube', youtubeController);
+app.use('/pinterest', pinterestController);
 /******************************************************/
+
+
 
 /**************FRONTEND RENDERING**********************/
 
@@ -104,7 +106,7 @@ app.post('/signup', function(req, res){
   req.body.password,
   function(err, user){
     if(err) res.redirect('/');
-    res.redirect('/social-authorization');
+    res.redirect('/' /*+ user.username*/);
   });
 });
 
@@ -121,8 +123,6 @@ app.delete('/logout', function(req, res){
 });
 
 /******************************************************/
-
-
 
 
 /*****************SERVER************************************/

@@ -8,7 +8,7 @@ var UserSchema = new Schema({
   password: String,
   createdAt: Date,
   updatedAt: Date,
-  socialModels: [Social.schema],
+  socialPlatforms: [Social.schema],
   key: String
 
   /*

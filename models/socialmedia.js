@@ -3,7 +3,7 @@ var passportLocalMongoose = require('passport-local-mongoose');
 var Schema = mongoose.Schema;
 
 var SocialSchema = new Schema({
-  accessToken: String,
+  accessCode: String,
   socialName: String
 });
 
