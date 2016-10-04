@@ -5,10 +5,18 @@
   </header>
 
   <main>
-    <button class="oauth-buttons" id="github-auth" type="button" name="button"><i class="fa fa-github" aria-hidden="true"></i></button>
-    <button class="oauth-buttons" id="pinterest-auth" type="button" name="button"><i class="fa fa-pinterest" aria-hidden="true"></i></button>
-    <button class="oauth-buttons" id="instagram-auth" type="button" name="button"><i class="fa fa-instagram" aria-hidden="true"></i></button>    
-    <button class="oauth-buttons" id="youtube-auth" type="button" name="button"><i class="fa fa-youtube-play" aria-hidden="true"></i></button>
+    <form action="/:user/github-oauth" method="POST">
+      <button class="oauth-buttons" id="github-auth" type="button" name="button"><i class="fa fa-github" aria-hidden="true"></i></button>
+    </form>
+    <form action="/:user/pinterest-oauthl" method="POST">
+      <button class="oauth-buttons" id="pinterest-auth" type="button" name="button"><i class="fa fa-pinterest" aria-hidden="true"></i></button>
+    </form>
+    <form action="/:user/instagram-oauth" method="POST">
+      <button class="oauth-buttons" id="instagram-auth" type="button" name="button"><i class="fa fa-instagram" aria-hidden="true"></i></button>
+    </form>
+    <form action="/:user/youtube-oauth" method="POST">
+      <button class="oauth-buttons" id="youtube-auth" type="button" name="button"><i class="fa fa-youtube-play" aria-hidden="true"></i></button>
+    </form>
   </main>
 
 </div>

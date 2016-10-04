@@ -55,6 +55,19 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 /******************************************************/
 
+/**********************Controllers***********************/
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+var instagramController = require('./controllers/instagram.js');
+var instagramController = require('./controllers/github.js');
+var instagramController = require('./controllers/youtube.js');
+var instagramController = require('./controllers/pinterest.js');
+app.use('/:username/instagram', instagramController);
+app.use('/:username/github', instagramController);
+app.use('/:username/youtube', instagramController);
+app.use('/:username/pinterest', instagramController);
+/******************************************************/
+
 /**************FRONTEND RENDERING**********************/
 
 //HOME
