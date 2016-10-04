@@ -8,7 +8,8 @@ var UserSchema = new Schema({
   password: String,
   createdAt: Date,
   updatedAt: Date,
-  socialModels: [Social.schema]
+  socialModels: [Social.schema],
+  key: String
 
   /*
   userID: String //for the QR code or personal link

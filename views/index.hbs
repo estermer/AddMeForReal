@@ -5,18 +5,31 @@
   </header>
 
   <main>
-    <form action="/{{user}}/github/oauth" method="POST">
-      <button class="oauth-buttons" id="github-auth" type="button" name="button"><i class="fa fa-github" aria-hidden="true"></i></button>
-    </form>
-    <form action="/{{user}}/pinterest/oauth" method="POST">
-      <button class="oauth-buttons" id="pinterest-auth" type="button" name="button"><i class="fa fa-pinterest" aria-hidden="true"></i></button>
-    </form>
-    <form action="/{{user}}/instagram/oauth" method="POST">
-      <button class="oauth-buttons" id="instagram-auth" type="button" name="button"><i class="fa fa-instagram" aria-hidden="true"></i></button>
-    </form>
-    <form action="/{{user}}/youtube/oauth" method="POST">
-      <button class="oauth-buttons" id="youtube-auth" type="button" name="button"><i class="fa fa-youtube-play" aria-hidden="true"></i></button>
-    </form>
+
+      <button class="oauth-buttons" id="github-auth" type="button" name="button">
+        <a href="#">
+          <i class="fa fa-github" aria-hidden="true"></i>
+        </a>
+      </button>
+
+      <button class="oauth-buttons" id="pinterest-auth" type="button" name="button">
+        <a href="#">
+          <i class="fa fa-pinterest" aria-hidden="true"></i>
+        </a>
+      </button>
+
+      <button class="oauth-buttons" id="instagram-auth" type="button" name="button">
+        <a href="https://api.instagram.com/oauth/authorize/?client_id=CLIENT-ID&redirect_uri=REDIRECT-URI&response_type=code">
+          <i class="fa fa-instagram" aria-hidden="true"></i>
+        </a>
+      </button>
+
+      <button class="oauth-buttons" id="youtube-auth" type="button" name="button">
+        <a href="#">
+          <i class="fa fa-youtube-play" aria-hidden="true"></i>
+        </a>
+      </button>
+
   </main>
 
 </div>
