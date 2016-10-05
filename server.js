@@ -77,23 +77,18 @@ app.get('/', function(req, res){
   res.render('home');
 });
 
-//INDEX
-app.get('/:username', function(req, res){
-  res.render('index', {
-    user: req.params.username
-  });
-});
-
 //USER-HOME
 app.get('/:username', function(req, res){
   //making sure user cannot access his account unless authorized
   if (!req.user || req.user.username != req.params.username) {
-    res.json({status: 401, message: 'unauthorized'})
+    res.redirect('/');
   } else {
     User.findOne({username: req.params.username}, function(err, user){
       if(err) console.log(err);
       console.log(user);
-      res.render('user-home', { user: user.username});
+      res.render('index', {
+        user: req.params.username
+      });
     })
   }
 });
