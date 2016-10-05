@@ -1,3 +1,7 @@
+var INSTAGRAM_CLIENT_ID = "e1ed6191cd4b4db29892f07bd60250a1";
+var INSTAGRAM_CLIENT_SECRET = "5619a5890c4741169a09dba46596c1b1";
+var REDIRECT_URL = "http://localhost:1992/instagram/auth/callback";
+
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
@@ -5,13 +9,10 @@ var InstagramStrategy = require('passport-instagram').Strategy;
 var User = require('../models/user.js');
 var addAccessCodeToUser = require('../public/js/add-access-code-to-user.js');
 
-var INSTAGRAM_CLIENT_ID = "e1ed6191cd4b4db29892f07bd60250a1";
-var INSTAGRAM_CLIENT_SECRET = "5619a5890c4741169a09dba46596c1b1";
-
 passport.use(new InstagramStrategy({
     clientID: INSTAGRAM_CLIENT_ID,
     clientSecret: INSTAGRAM_CLIENT_SECRET,
-    callbackURL: "http://localhost:1992/instagram/auth/callback"
+    callbackURL: REDIRECT_URL
   },
   function(accessToken, refreshToken, profile, done) {
     // asynchronous verification, for effect...

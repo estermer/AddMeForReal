@@ -10,8 +10,6 @@ var User = require('../models/user.js');
 var addAccessCodeToUser = require('../public/js/add-access-code-to-user.js');
 
 
-
-
 passport.use(new GitHubStrategy({
     clientID: GITHUB_CLIENT_ID,
     clientSecret: GITHUB_CLIENT_SECRET,
