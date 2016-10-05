@@ -26,10 +26,10 @@ router.get('/auth/callback', function(req, res){
     var username = req.user.username
     User.findOne({username: username}, function(err, user){
       if(err)console.log(err);
-
+      console.log(req.query.oauth_token);
       //check if a code has already been aquired and added into user model
       //if not then add it to the user model
-      addAccessCodeToUser(user, user.socialPlatforms, "linkedin", req.query.code);
+      addAccessCodeToUser(user, user.socialPlatforms, "linkedin", req.query.oauth_token);
 
       res.redirect('/' + req.user.username);
     });
