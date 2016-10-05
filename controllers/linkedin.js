@@ -1,28 +1,26 @@
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
-var InstagramStrategy = require('passport-instagram').Strategy;
+var LinkedInStrategy = require('passport-linkedin').Strategy;
 var User = require('../models/user.js');
 var addAccessCodeToUser = require('../public/js/add-access-code-to-user.js');
 
-var INSTAGRAM_CLIENT_ID = "e1ed6191cd4b4db29892f07bd60250a1";
-var INSTAGRAM_CLIENT_SECRET = "5619a5890c4741169a09dba46596c1b1";
+var LINKEDIN_API_KEY = "787mdoc8d03y8m";
+var LINKEDIN_SECRET_KEY = "DrVs8FUxw8wHbxNA";
 
-passport.use(new InstagramStrategy({
-    clientID: INSTAGRAM_CLIENT_ID,
-    clientSecret: INSTAGRAM_CLIENT_SECRET,
-    callbackURL: "http://localhost:1992/instagram/auth/callback"
+passport.use(new LinkedInStrategy({
+    consumerKey: LINKEDIN_API_KEY,
+    consumerSecret: LINKEDIN_SECRET_KEY,
+    callbackURL: "http://localhost:1992/linkedin/auth/callback"
   },
-  function(accessToken, refreshToken, profile, done) {
-    // asynchronous verification, for effect...
-    //from the passport-instagram example
-    // process.nextTick(function () {
-    //   return done(null, profile);
+  function(token, tokenSecret, profile, done) {
+    // User.findOrCreate({ linkedinId: profile.id }, function (err, user) {
+    //   return done(err, user);
     // });
   }
 ));
 
-router.get('/auth', passport.authenticate('instagram'));
+router.get('/auth', passport.authenticate('linkedin'));
 
 router.get('/auth/callback', function(req, res){
     var username = req.user.username
@@ -31,7 +29,7 @@ router.get('/auth/callback', function(req, res){
 
       //check if a code has already been aquired and added into user model
       //if not then add it to the user model
-      addAccessCodeToUser(user, user.socialPlatforms, "instagram", req.query.code);
+      addAccessCodeToUser(user, user.socialPlatforms, "linkedin", req.query.code);
 
       res.redirect('/' + req.user.username);
     });

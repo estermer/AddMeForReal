@@ -72,9 +72,13 @@ input {
   background-color: #517fa4;
 }
 
-#pinterest-auth {
-  background-color: #bd081c;
+#linkedin-auth {
+  background-color: #0077b5;
 }
+
+/*#pinterest-auth {
+  background-color: #bd081c;
+}*/
 
 #youtube-auth {
   background-color: #e62117;
