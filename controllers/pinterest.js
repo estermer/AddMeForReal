@@ -11,7 +11,7 @@ var PINTEREST_APP_SECRET = "8cc6bcb94a7a5075de5348d19160962d6d3d7fc04ca64603b14c
 passport.use(new PinterestStrategy({
         clientID: PINTEREST_APP_ID,
         clientSecret: PINTEREST_APP_SECRET,
-        scope: ['read_public', 'read_relationships'],
+        scope: ['write_relationships'],
         callbackURL: "https://localhost:3000/pinterest/auth/callback"
     },
     function(accessToken, refreshToken, profile, done) {
@@ -30,7 +30,7 @@ router.get('/auth/callback', function(req, res){
 
       //check if a code has already been aquired and added into user model
       //if not then add it to the user model
-      addAccessCodeToUser(user, user.socialPlatforms, "pinteerest", req.query.code);
+      addAccessCodeToUser(user, user.socialPlatforms, "pinteerest", req.query.state);
 
       res.redirect('/' + req.user.username);
     });
