@@ -4,6 +4,7 @@ var REDIRECT_URL = "http://localhost:1992/instagram/auth/callback";
 
 var express = require('express');
 var router = express.Router();
+var request = require('request');
 var passport = require('passport');
 var InstagramStrategy = require('passport-instagram').Strategy;
 var User = require('../models/user.js');
