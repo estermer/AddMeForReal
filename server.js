@@ -67,7 +67,7 @@ app.use('/instagram', instagramController);
 app.use('/github', githubController);
 app.use('/youtube', youtubeController);
 app.use('/pinterest', pinterestController);
-app.use('/twitter', pinterestController);
+app.use('/twitter', twitterController);
 /******************************************************/
 
 
