@@ -101,7 +101,11 @@ app.post('/signup', function(req, res){
   req.body.password,
   function(err, user){
     if(err) res.redirect('/');
-    res.redirect('/' /*+ user.username*/);
+    //auto login after signup
+    req.login(user, function(err) {
+      if (err) { return next(err); }
+      return res.redirect('/' + req.user.username);
+    });
   });
 });
 
@@ -128,4 +132,4 @@ app.listen(port, function () {
 
   console.log("Server listening at port " + port);
 
-})
+});
