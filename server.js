@@ -62,10 +62,12 @@ var instagramController = require('./controllers/instagram.js');
 var githubController = require('./controllers/github.js');
 var youtubeController = require('./controllers/youtube.js');
 var pinterestController = require('./controllers/pinterest.js');
+var twitterController = require('./controllers/twitter.js');
 app.use('/instagram', instagramController);
 app.use('/github', githubController);
 app.use('/youtube', youtubeController);
 app.use('/pinterest', pinterestController);
+app.use('/twitter', pinterestController);
 /******************************************************/
 
 
