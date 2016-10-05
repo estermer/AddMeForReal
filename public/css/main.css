@@ -80,6 +80,10 @@ input {
   background-color: #e62117;
 }
 
+#twitter-auth {
+  background-color: #1da1f2;
+}
+
 a {
   color: white;
 }
