@@ -32,6 +32,7 @@ router.get('/auth/callback', function(req, res){
     var username = req.user.username;
 
     //form info to sent to instagram
+    //instagram.com/developer/authentication/  //Step Three
     var options = {
       url: "https://api.instagram.com/oauth/access_token",
       //instagram specifically asks for a post method
