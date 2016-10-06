@@ -7,6 +7,7 @@ var app = express();
 var router = express.Router();
 var Linkedin = require('node-linkedin')(LINKEDIN_API_KEY, LINKEDIN_SECRET_KEY, REDIRECT_URI);
 var linkedin = Linkedin.init('my_access_token');
+var request = require('request');
 var User = require('../models/user.js');
 var addAccessCodeToUser = require('../public/js/add-access-code-to-user.js');
 
@@ -21,18 +22,29 @@ router.get('/auth/callback', function(req, res){
     var username = req.user.username;
     //getting the access token using the oauth_code and oauth_state gathered in the request
     Linkedin.auth.getAccessToken(res, req.query.code, req.query.state, function(err, results) {
-        if ( err )
-            return console.error(err);
-        console.log(results);
+        if ( err ) return console.error(err);
+        // console.log(results);
+
+        var options = {
+          url: "https://api.linkedin.com/v1/people/~:(id)?format=json",
+          method: "GET",
+          headers: {
+            Authorization: "Bearer " + results.access_token
+          }
+        }
+
+        request(options, function(err, body){
+          console.log(body);
+        });
 
         //find user and input and save the access_token
-        User.findOne({username: username}, function(err, user){
-          if(err)console.log(err);
-          console.log(req.query);
-          //check if a code has already been aquired and added into user model
-          //if not then add it to the user model
-          addAccessCodeToUser(user, user.socialPlatforms, "linkedin", results.access_token);
-        });
+        // User.findOne({username: username}, function(err, user){
+        //   if(err)console.log(err);
+        //   console.log(req.query);
+        //   //check if a code has already been aquired and added into user model
+        //   //if not then add it to the user model
+        //   addAccessCodeToUser(user, user.socialPlatforms, "linkedin", results.access_token);
+        // });
 
         console.log(results.access_token);
         return res.redirect('/' + req.user.username);

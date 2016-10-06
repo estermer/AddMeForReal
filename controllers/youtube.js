@@ -7,6 +7,7 @@ var router = express.Router();
 var passport = require('passport');
 var YoutubeV3Strategy = require('passport-youtube-v3').Strategy;
 var request = require('request');
+var requestp = require('request-promise');
 var User = require('../models/user.js');
 var addAccessCodeToUser = require('../public/js/add-access-code-to-user.js');
 
@@ -44,20 +45,40 @@ router.get('/auth/callback', function(req, res){
       }
     };
 
-    //actualy sending the request to instagram
-    request(options, function(err,res,body){
-      console.log(body.access_token);
-      var accessToken = body.access_token;
+    //First request is for youtube accessToken
+    requestp(options)
+    .then(function(body){
+      return body.access_token;
+    })
+    .then(function(accessToken){
+      console.log(accessToken);
 
-      //updating user info to include accessToken
-      User.findOne({username: username}, function(err, user){
-        if(err)console.log(err);
+      //options needed to request the userData including username
+      var userOptions = {
+        url: "https://www.googleapis.com/youtube/v3/channels?part=id&mine=true&access_token=" + accessToken,
+        method: "GET",
+        json: true,
+        headers: {
+          "User-Agent": "AddMe",
+        }
+      };
 
-        //check if a code has already been aquired and added into user model
-        //if not then add it to the user model
-        addAccessCodeToUser(user, user.socialPlatforms, "youtube", accessToken);
+      //UserData request
+      requestp(userOptions)
+      .then (function(body){
+        console.log(body.items[0].id);
 
+        //updating user info to include accessToken
+        // User.findOne({username: username}, function(err, user){
+        //   if(err)console.log(err);
+        //
+        //   //check if a code has already been aquired and added into user model
+        //   //if not then add it to the user model
+        //   addAccessCodeToUser(user, user.socialPlatforms, "youtube", accessToken);
+        //
+        // });
       });
+
     });
 
     res.redirect('/' + req.user.username);

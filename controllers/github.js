@@ -6,6 +6,7 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var request = require('request');
+var requestp = require('request-promise');
 var GitHubStrategy = require('passport-github2').Strategy;
 var User = require('../models/user.js');
 var addAccessCodeToUser = require('../public/js/add-access-code-to-user.js');
@@ -17,7 +18,7 @@ passport.use(new GitHubStrategy({
     callbackURL: REDIRECT_URL
   },
   function(accessToken, refreshToken, profile, done) {
-    // User.findOrCreate({ githubId: profile.id }, function (err, user) {
+    // User.findOrCreate({ username: profile.id }, function (err, user) {
     //   return done(err, user);
     // });
   }
@@ -41,19 +42,37 @@ router.get('/auth/callback', function(req, res){
     }
   };
 
-  //actualy sending the request to instagram
-  request(options, function(err,res,body){
-    console.log(body);
-    var accessToken = body.access_token;
+  //requestp to first make accessToken request, then request for user data
+  requestp(options)
+  .then(function(body){
+    return body.access_token;
+  })
+  .then(function(accessToken){
 
-    //updating user info to include accessToken
-    User.findOne({username: username}, function(err, user){
-      if(err)console.log(err);
+    //options needed to request the userData including username
+    var userOptions = {
+      url: "https://api.github.com/user?access_token=" + accessToken,
+      method: "GET",
+      json: true,
+      headers: {
+        "User-Agent": "AddMe",
+      }
+    };
 
-      //check if a code has already been aquired and added into user model
-      //if not then add it to the user model
-      addAccessCodeToUser(user, user.socialPlatforms, "github", accessToken);
+    //UserData request
+    requestp(userOptions)
+    .then (function(body){
+      console.log(body.login);
 
+      // updating user info to include accessToken
+      User.findOne({username: username}, function(err, user){
+        if(err)console.log(err);
+
+        //check if a code has already been aquired and added into user model
+        //if not then add it to the user model
+        addAccessCodeToUser(user, user.socialPlatforms, "github", body.login, accessToken);
+
+      });
     });
   });
 
