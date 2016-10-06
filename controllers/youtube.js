@@ -48,7 +48,7 @@ router.get('/auth/callback', function(req, res){
     request(options, function(err,res,body){
       console.log(body.access_token);
       var accessToken = body.access_token;
-      
+
       //updating user info to include accessToken
       User.findOne({username: username}, function(err, user){
         if(err)console.log(err);

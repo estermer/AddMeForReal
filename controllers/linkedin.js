@@ -23,6 +23,7 @@ router.get('/auth/callback', function(req, res){
     Linkedin.auth.getAccessToken(res, req.query.code, req.query.state, function(err, results) {
         if ( err )
             return console.error(err);
+        console.log(results);
 
         //find user and input and save the access_token
         User.findOne({username: username}, function(err, user){

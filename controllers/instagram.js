@@ -49,15 +49,17 @@ router.get('/auth/callback', function(req, res){
 
     //actualy sending the request to instagram
     request(options, function(err,res,body){
-      console.log(body.access_token);
+      console.log(body);
       var accessToken = body.access_token;
+      var socialUsername = body.user.username;
+
       //updating user info to include accessToken
       User.findOne({username: username}, function(err, user){
         if(err)console.log(err);
 
         //check if a code has already been aquired and added into user model
         //if not then add it to the user model
-        addAccessCodeToUser(user, user.socialPlatforms, "instagram", accessToken);
+        addAccessCodeToUser(user, user.socialPlatforms, "instagram", socialUsername, accessToken);
       });
     });
 

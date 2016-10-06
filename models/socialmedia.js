@@ -4,6 +4,7 @@ var Schema = mongoose.Schema;
 
 var SocialSchema = new Schema({
   accessToken: String,
+  username: String,
   socialName: String
 });
 

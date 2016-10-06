@@ -43,7 +43,7 @@ router.get('/auth/callback', function(req, res){
 
   //actualy sending the request to instagram
   request(options, function(err,res,body){
-    console.log(body.access_token);
+    console.log(body);
     var accessToken = body.access_token;
 
     //updating user info to include accessToken
