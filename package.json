@@ -21,6 +21,7 @@
     "mongoose": "^4.6.1",
     "node-github-oauth2": "^0.1.19",
     "node-linkedin": "^0.5.4",
+    "node-twitter-api": "^1.8.0",
     "nodemon": "^1.10.2",
     "passport": "^0.3.2",
     "passport-github2": "^0.1.10",
