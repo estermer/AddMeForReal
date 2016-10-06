@@ -33,7 +33,7 @@
     "passport-twitter": "^1.0.4",
     "passport-youtube-v3": "^2.0.0",
     "request": "^2.75.0"
-  }
+  },
   "engines": {
     "node": "6.3.1"
   }
