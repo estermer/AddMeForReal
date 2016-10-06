@@ -18,7 +18,8 @@ var User = require('./models/user.js');
 /******************************************************/
 
 /*************Mongoose*********************************/
-mongoose.connect('mongodb://localhost/addme');
+var mongoURI =  process.env.MONGODB_URI || 'mongodb://localhost/addme';
+mongoose.connect(mongoURI);
 mongoose.Promise = global.Promise;
 /******************************************************/
 
