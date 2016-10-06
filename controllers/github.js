@@ -31,7 +31,6 @@ router.get('/auth/callback', function(req, res){
 
   var options = {
     url: "https://github.com/login/oauth/access_token",
-    //instagram specifically asks for a post method
     method: 'POST',
     json: true,
     form: {
