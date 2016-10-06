@@ -16,6 +16,7 @@ passport.use(new InstagramStrategy({
     callbackURL: REDIRECT_URL
   },
   function(accessToken, refreshToken, profile, done) {
+    console.log(accessToken);
     // asynchronous verification, for effect...
     //from the passport-instagram example
     // process.nextTick(function () {
@@ -27,16 +28,40 @@ passport.use(new InstagramStrategy({
 router.get('/auth', passport.authenticate('instagram'));
 
 router.get('/auth/callback', function(req, res){
-    var username = req.user.username
-    User.findOne({username: username}, function(err, user){
-      if(err)console.log(err);
+    var accessCode = req.query.code;
+    var username = req.user.username;
 
-      //check if a code has already been aquired and added into user model
-      //if not then add it to the user model
-      addAccessCodeToUser(user, user.socialPlatforms, "instagram", req.query.code);
+    //form info to sent to instagram
+    var options = {
+      url: "https://api.instagram.com/oauth/access_token",
+      //instagram specifically asks for a post method
+      method: 'POST',
+      json: true,
+      form: {
+          client_id : INSTAGRAM_CLIENT_ID,
+          client_secret : INSTAGRAM_CLIENT_SECRET,
+          grant_type: 'authorization_code',
+          redirect_uri: REDIRECT_URL,
+          code: accessCode
+      }
+    };
 
-      res.redirect('/' + req.user.username);
+    //actualy sending the request to instagram
+    request(options, function(err,res,body){
+      console.log(body.access_token);
+      var accessToken = body.access_token;
+      //updating user info to include accessToken
+      User.findOne({username: username}, function(err, user){
+        if(err)console.log(err);
+
+        //check if a code has already been aquired and added into user model
+        //if not then add it to the user model
+        addAccessCodeToUser(user, user.socialPlatforms, "instagram", accessToken);
+      });
     });
+
+    //redirect back to the users authorization page
+    res.redirect('/' + req.user.username);
 });
 
 module.exports = router;
